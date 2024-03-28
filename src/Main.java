@@ -1,7 +1,7 @@
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -11,31 +11,9 @@ import java.util.regex.Pattern;
  * andreello.dev.br
  */
 
-class Node {
-    String name;
-    Node prior;
-    ArrayList<Node> children;
-
-    public Node(String name) {
-        this.name = name;
-        this.children = new ArrayList<Node>();
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public Node getPrior() {
-        return this.prior;
-    }
-
-
-    public void setPrior(Node prior) {
-        this.prior = prior;
-    }
-}
-
 public class Main {
+    static String URL_NOT_FOUND = "URL connection error";
+
     private static boolean CanBeIgnored(String line) {
         return line.startsWith("<!") ||
                 line.isEmpty();
@@ -66,17 +44,20 @@ public class Main {
 //            return;
 //        }
 
-        String filePath = "C:\\Users\\eu\\OneDrive\\Área de Trabalho\\HTML TEST\\index.html";//args[0];
-        File file = new File(filePath);
-
-        if (!file.exists()) {
-            System.out.println("File \"" + filePath + "\" informed not exists");
+        URL url = null;
+        try {
+            url = new URL("http://hiring.axreng.com/internship/example1.html");
+            url.toURI();
+        } catch (Exception e) {
+            System.out.println(URL_NOT_FOUND);
             return;
         }
 
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
         Node current = null;
-        FileReader fileReader = new FileReader(filePath);
-        try (BufferedReader reader = new BufferedReader(fileReader)) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
@@ -110,12 +91,31 @@ public class Main {
             }
 
             System.out.println(true);
-
-//            if (!VerifyHTMLIntegrity()) {
-//                System.out.println("malformed HTML");
-//            }
-        } catch (IOException e) {
-            System.out.println("Something gone wrong while reading the file");
+        } catch (FileNotFoundException e) {
+            System.out.println(URL_NOT_FOUND);
         }
+    }
+}
+
+class Node {
+    String name;
+    Node prior;
+    ArrayList<Node> children;
+
+    public Node(String name) {
+        this.name = name;
+        this.children = new ArrayList<Node>();
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Node getPrior() {
+        return this.prior;
+    }
+
+    public void setPrior(Node prior) {
+        this.prior = prior;
     }
 }
