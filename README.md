@@ -2,5 +2,5 @@
 
 - [X] Initial commit;
 - [X] URL Validation & support;
-- [ ] Get the TEXT from the far element;
-- [ ] HTML Validation;
+- [X] Get the TEXT from the far element;
+- [X] HTML Validation;
