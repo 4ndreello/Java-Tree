@@ -8,12 +8,9 @@ import java.util.regex.Pattern;
 
 /**
  * @author Gabriel Andreello (andreello.dev.br)
- * @javaVersion  Amazon Correto 17.0.10
  */
 
-class MalformedException extends Exception {
-    public MalformedException() {}
-}
+class MalformedException extends Exception {}
 
 class Node {
     boolean open;
