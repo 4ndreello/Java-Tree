@@ -1,8 +1,5 @@
 import java.io.*;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -112,7 +109,7 @@ public class HtmlAnalyzer {
             }
 
             System.out.println(biggestNode.text);
-        } catch (ConnectException | UnknownHostException e) {
+        } catch (ConnectException | UnknownHostException | SocketTimeoutException e) {
             System.out.println(URL_ERROR);
         } catch (MalformedException | FileNotFoundException e) {
             System.out.println(MALFORMED_HTML);
