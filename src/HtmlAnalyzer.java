@@ -49,6 +49,7 @@ public class HtmlAnalyzer {
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
+        con.setConnectTimeout(3000);
 
         Node biggestNode = new Node("result");
         Node current = null;
