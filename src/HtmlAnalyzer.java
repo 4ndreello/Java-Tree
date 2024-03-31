@@ -4,14 +4,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
 import java.util.regex.Pattern;
 
 /**
- * @author Gabriel Andreello
- * Java version: Amazon Correto 17.0.10
- *
- * andreello.dev.br
+ * @author Gabriel Andreello (andreello.dev.br)
+ * @javaVersion  Amazon Correto 17.0.10
  */
 
 class MalformedException extends Exception {
@@ -29,11 +26,11 @@ class Node {
     public Node(String name) {
         this.name = name;
         this.open = true;
-        this.children = new ArrayList<Node>();
+        this.children = new ArrayList<>();
     }
 }
 
-public class Main {
+public class HtmlAnalyzer {
     static int notClosedTags = 0;
     static String URL_ERROR = "URL connection error";
     static String MALFORMED_HTML = "malformed HTML";
