@@ -109,7 +109,7 @@ public class HtmlAnalyzer {
             }
 
             System.out.println(biggestNode.text);
-        } catch (ConnectException | UnknownHostException | SocketTimeoutException e) {
+        } catch (ConnectException | UnknownHostException | NoRouteToHostException | SocketTimeoutException e) {
             System.out.println(URL_ERROR);
         } catch (MalformedException | FileNotFoundException e) {
             System.out.println(MALFORMED_HTML);
